@@ -21,4 +21,14 @@ specificationsRoutes.post("/", (req, res) => {
   }
 });
 
+specificationsRoutes.get("/", (req, res) => {
+  try {
+    const specifications = specificationsRepository.list();
+
+    return res.status(201).json(specifications);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+
 export { specificationsRoutes };
