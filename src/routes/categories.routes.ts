@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { CategoriesRepository } from "../modules/cars/repositories/CategoryRepository";
+import { CategoriesRepository } from "../modules/cars/repositories/category/CategoriesRepository";
 import { CreateCategoryService } from "../modules/cars/services/CreateCategoryService";
 
 const categoriesRoutes = Router();
@@ -18,7 +18,7 @@ categoriesRoutes.post("/", (req, res) => {
 
     return res.status(201).send();
   } catch (error) {
-    return res.status(400).json({ error: new Error(error) });
+    return res.status(400).send(error);
   }
 });
 
