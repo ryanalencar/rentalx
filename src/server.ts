@@ -1,6 +1,6 @@
-import { router } from "./routes";
+import * as express from "express";
 
-const express = require("express");
+import { router } from "./routes";
 
 const app = express();
 
