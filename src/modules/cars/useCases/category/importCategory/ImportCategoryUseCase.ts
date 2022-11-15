@@ -1,5 +1,5 @@
 import { parse } from "csv-parse";
-import * as fs from "fs";
+import fs from "fs";
 
 import { ICategoriesRepository } from "../../../repositories/ICategoriesRepository";
 
