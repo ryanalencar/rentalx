@@ -1,10 +1,16 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 
+import { Database } from "./database/config";
 import { router } from "./routes";
 import swaggerFile from "./swagger.json";
+import "reflect-metadata";
 
-import "reflect-metadata"
+Database.initialize()
+  .then(() => {
+    console.log("Database initialized");
+  })
+  .catch((error) => console.log(error));
 
 const app = express();
 
