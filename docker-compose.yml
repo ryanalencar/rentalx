@@ -1,11 +1,11 @@
-version: "3.7"
+version: "3.9"
 
 volumes:
   pgdata:
     driver: local
 
 services:
-  database:
+  rentx-database:
     image: postgres
     container_name: rentx-database
     restart: always
@@ -16,8 +16,7 @@ services:
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=rentx
     volumes:
-      - pgdata:/data/postgres
-    network_mode: host
+      - pgdata:/var/lib/postgresql/data
 
   app:
     build: .
@@ -27,4 +26,7 @@ services:
       - 3333:3333
     volumes:
       - .:/usr/app
-    network_mode: host
+    links:
+      - rentx-database
+    depends_on:
+      - rentx-database

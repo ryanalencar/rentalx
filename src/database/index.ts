@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 
 export const Database = new DataSource({
   type: "postgres",
-  host: "localhost",
+  host: "rentx-database",
   port: 5432,
   username: "postgres",
   password: "123456",
@@ -11,3 +11,9 @@ export const Database = new DataSource({
   subscribers: [],
   migrations: [],
 });
+
+Database.initialize()
+  .then(() => {
+    console.log("Database initialized");
+  })
+  .catch((error) => console.log(error));
