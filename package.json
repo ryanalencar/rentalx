@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn --poll src/server.ts"
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn --poll src/server.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "typeorm:migration-run": "typeorm-ts-node-commonjs migration:run -d src/database/index.ts",
+    "typeorm:migration-revert": "typeorm-ts-node-commonjs migration:revert -d src/database/index.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

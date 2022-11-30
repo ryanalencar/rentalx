@@ -1,19 +1,20 @@
 import { DataSource } from "typeorm";
+import "reflect-metadata";
 
-export const Database = new DataSource({
+const AppDataSource = new DataSource({
   type: "postgres",
-  host: "rentx-database",
+  host: "localhost",
   port: 5432,
   username: "postgres",
   password: "123456",
   database: "rentx",
   entities: [],
   subscribers: [],
-  migrations: [],
+  migrations: ["src/database/migrations/*.ts"],
 });
 
-Database.initialize()
-  .then(() => {
-    console.log("Database initialized");
-  })
-  .catch((error) => console.log(error));
+export function createConnection(host = "rentx-database"): Promise<DataSource> {
+  return AppDataSource.setOptions({ host }).initialize();
+}
+
+export default AppDataSource;

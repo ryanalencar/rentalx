@@ -1,0 +1,17 @@
+import express from "express";
+import swaggerUi from "swagger-ui-express";
+
+import "reflect-metadata";
+import { createConnection } from "./database";
+import { router } from "./routes";
+import swaggerFile from "./swagger.json";
+
+createConnection();
+
+const app = express();
+
+app.use(express.json());
+app.use(router);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+export { app };
