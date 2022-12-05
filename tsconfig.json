@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "es5",
     "moduleResolution": "Node",
     "rootDir": ".",
@@ -9,8 +10,8 @@
   "module": "commonjs",
   "strict": false,
   "allowSyntheticDefaultImports": true,
-  "skipLibCheck": true,
   "forceConsistentCasingInFileNames": true,
+  "skipLibCheck": true,
   "exclude": [
     "node_modules",
   ],
