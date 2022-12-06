@@ -1,7 +1,7 @@
-import { parse } from "csv-parse";
-import fs from "fs";
+import { parse } from 'csv-parse';
+import fs from 'fs';
 
-import { ICategoriesRepository } from "../../../repositories/ICategoriesRepository";
+import { ICategoriesRepository } from '../../../repositories/ICategoriesRepository';
 
 interface IImportCategory {
   name: string;
@@ -21,12 +21,12 @@ class ImportCategoryUseCase {
       stream.pipe(parseFile);
 
       parseFile
-        .on("data", async (line) => {
+        .on('data', async (line) => {
           const [name, description] = line;
           categories.push({ name, description });
         })
-        .on("end", () => resolve(categories))
-        .on("error", (err) => reject(err));
+        .on('end', () => resolve(categories))
+        .on('error', (err) => reject(err));
     });
   }
 

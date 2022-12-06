@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import { CreateEspecificationUseCase } from "./CreateEspecificationUseCase";
+import { CreateEspecificationUseCase } from './CreateEspecificationUseCase';
 
 class CreateSpecificationController {
   constructor(
-    private createSpecificationUseCase: CreateEspecificationUseCase
+    private createSpecificationUseCase: CreateEspecificationUseCase,
   ) { }
 
   handle(request: Request, response: Response) {
