@@ -14,10 +14,10 @@ class CreateCategoryUseCase {
     );
 
     if (categoryAlreadyExists) {
-      throw new Error('Category already exists');
+      throw new Error('Category already exists!');
     }
 
-    this.categoriesRepository.create({ description, name });
+    await this.categoriesRepository.create({ name, description });
   }
 }
 
