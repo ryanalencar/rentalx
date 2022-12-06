@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
     "target": "es5",
-    "moduleResolution": "Node",
     "rootDir": ".",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
   },
   "module": "commonjs",
   "strict": false,
