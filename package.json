@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "description": "Nodejs API for car rental",
+  "author": "Ryan Alencar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanalencar/rentalx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ryanalencar/rentalx/issues"
+  },
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn --poll src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
