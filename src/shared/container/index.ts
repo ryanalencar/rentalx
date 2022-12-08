@@ -16,6 +16,6 @@ container.registerSingleton<ICategoriesRepository>(
 );
 
 container.registerSingleton<ISpecificationsRepository>(
-  Singletons.CategoriesRepository,
+  Singletons.SpecificationsRepository,
   SpecificationsRepository,
 );
