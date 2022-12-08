@@ -43,6 +43,11 @@ docker-compose up
 yarn typeorm:migration-run
 ```
 
+## Documentation
+```sh
+http://localhost:[PORT]/api-docs/
+```
+
 ## Author
 
 👤 **Ryan Alencar**
