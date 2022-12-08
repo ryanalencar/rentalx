@@ -1,10 +1,12 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 
-import 'reflect-metadata';
 import { createConnection } from './database';
 import { router } from './routes';
 import swaggerFile from './swagger.json';
+
+import 'reflect-metadata';
+import './shared/container';
 
 createConnection();
 
