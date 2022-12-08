@@ -3,7 +3,7 @@ import multer from 'multer';
 
 import { CreateCategoryController } from '../modules/cars/useCases/category/createCategory';
 import { ImportCategoryController } from '../modules/cars/useCases/category/importCategory';
-import listCategoriesController from '../modules/cars/useCases/category/listCategories';
+import { ListCategoriesController } from '../modules/cars/useCases/category/listCategories';
 
 const categoriesRoutes = Router();
 
@@ -13,12 +13,11 @@ const upload = multer({
 
 const createCategoryController = new CreateCategoryController();
 const importCategoryController = new ImportCategoryController();
+const listCategoriesController = new ListCategoriesController();
 
 categoriesRoutes.post('/', createCategoryController.handle);
 
-categoriesRoutes.get('/', (req, res) =>
-  listCategoriesController().handle(req, res),
-);
+categoriesRoutes.get('/', listCategoriesController.handle);
 
 categoriesRoutes.post(
   '/import',
