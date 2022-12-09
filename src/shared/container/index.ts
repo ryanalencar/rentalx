@@ -24,6 +24,6 @@ container.registerSingleton<ISpecificationsRepository>(
 );
 
 container.registerSingleton<IUsersRepository>(
-  Singletons.SpecificationsRepository,
+  Singletons.UsersRepository,
   UsersRepository,
 );

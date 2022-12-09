@@ -1,5 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
+import { Singletons } from '../../../../../shared/container';
 import { ICategoriesRepository } from '../../../repositories/ICategoriesRepository';
 
 interface IRequest {
@@ -10,7 +11,7 @@ interface IRequest {
 @injectable()
 class CreateCategoryUseCase {
   constructor(
-    @inject('CategoriesRepository')
+    @inject(Singletons.CategoriesRepository)
     private categoriesRepository: ICategoriesRepository,
   ) { }
 

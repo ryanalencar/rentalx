@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 
+import { User } from '../modules/accounts/entitites';
 import { Category, Specification } from '../modules/cars/entities';
 
 import 'reflect-metadata';
@@ -11,7 +12,7 @@ const AppDataSource = new DataSource({
   username: 'postgres',
   password: '123456',
   database: 'rentx',
-  entities: [Category, Specification],
+  entities: [Category, Specification, User],
   subscribers: [],
   migrations: ['src/database/migrations/*.ts'],
 });
