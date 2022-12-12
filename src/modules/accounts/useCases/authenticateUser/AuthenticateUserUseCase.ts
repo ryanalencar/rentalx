@@ -2,7 +2,9 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../errors/AppError';
 import { Singletons } from '../../../../shared/container';
+import { statusCode } from '../../../../utils';
 import { ICreateUserDTO } from '../../dtos';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 
@@ -29,11 +31,19 @@ class AuthenticateUserUseCase {
   }: IAuthenticateUserRequest): Promise<IAuthenticateUserResponse> {
     const user = await this.usersRepository.findByEmail(email);
 
-    if (!user) throw new Error('Email or password incorrect');
+    if (!user)
+      throw new AppError(
+        'Email or password incorrect',
+        statusCode.unauthorized,
+      );
 
     const passwordMatch = await compare(password, user.password);
 
-    if (!passwordMatch) throw new Error('Email or password incorrect');
+    if (!passwordMatch)
+      throw new AppError(
+        'Email or password incorrect',
+        statusCode.unauthorized,
+      );
 
     const token = sign({}, '5490f5b9758d9b33f2b37c3cbca45677', {
       subject: user.id,

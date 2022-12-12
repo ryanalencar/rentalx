@@ -1,7 +1,9 @@
 import { hash } from 'bcryptjs';
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../errors/AppError';
 import { Singletons } from '../../../../shared/container';
+import { statusCode } from '../../../../utils';
 import { ICreateUserDTO } from '../../dtos';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 
@@ -19,7 +21,8 @@ class CreateUserUseCase {
       data.email,
     );
 
-    if (userAlreadyExists) throw new Error('User already exists');
+    if (userAlreadyExists)
+      throw new AppError('User already exists', statusCode.conflict);
 
     const user = {
       ...data,
