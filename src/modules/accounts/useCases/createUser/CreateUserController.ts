@@ -19,7 +19,6 @@ class CreateUserController {
 
       return response.status(201).send();
     } catch (error) {
-      console.log(error);
       return response.status(400).send(error);
     }
   }
