@@ -33,6 +33,8 @@ export async function isAuthenticated(
     if (!user)
       throw new AppError('User does not exist', statusCode.unauthorized);
 
+    request.user = { id: user_id };
+
     next();
   } catch (error) {
     throw new AppError(error, statusCode.unauthorized);
