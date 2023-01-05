@@ -7,7 +7,30 @@
     "moduleResolution": "Node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "."
+    "baseUrl": "./",
+    "paths": {
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@database/*": [
+        "./src/database/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
+      "@errors/*": [
+        "./src/errors/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@test/*": [
+        "./test/*"
+      ]
+    }
   },
   "module": "commonjs",
   "strict": false,
