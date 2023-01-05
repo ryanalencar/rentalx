@@ -13,7 +13,7 @@
     "url": "https://github.com/ryanalencar/rentalx/issues"
   },
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn --poll src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn --poll src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "typeorm:migration-run": "typeorm-ts-node-commonjs migration:run -d src/database/index.ts",
     "typeorm:migration-revert": "typeorm-ts-node-commonjs migration:revert -d src/database/index.ts",
@@ -43,6 +43,7 @@
     "prettier": "^2.7.1",
     "ts-jest": "^29.0.3",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "*"
   },
   "dependencies": {
