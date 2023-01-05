@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Singletons } from '../../../../../shared/container';
-import { Specification } from '../../../entities/Specification';
-import { ISpecificationsRepository } from '../../../repositories/ISpecificationsRepository';
+import { Specification } from '@modules/cars/entities';
+import { ISpecificationsRepository } from '@modules/cars/repositories/ISpecificationsRepository';
+import { Singletons } from '@shared/container';
 
 @injectable()
 class ListSpecificationsUseCase {

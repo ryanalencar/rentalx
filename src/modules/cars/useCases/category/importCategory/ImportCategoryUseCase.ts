@@ -2,8 +2,8 @@ import { parse } from 'csv-parse';
 import fs from 'fs';
 import { inject, injectable } from 'tsyringe';
 
-import { Singletons } from '../../../../../shared/container';
-import { ICategoriesRepository } from '../../../repositories/ICategoriesRepository';
+import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository';
+import { Singletons } from '@shared/container';
 
 interface IImportCategory {
   name: string;

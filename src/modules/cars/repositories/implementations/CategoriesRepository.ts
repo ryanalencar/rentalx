@@ -1,7 +1,8 @@
 import { Repository } from 'typeorm';
 
-import AppDataSource from '../../../../database';
-import { Category } from '../../entities/Category';
+import { AppDataSource } from '@database/index';
+import { Category } from '@modules/cars/entities';
+
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,

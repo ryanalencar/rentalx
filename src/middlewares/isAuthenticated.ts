@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
-import { AppError } from '../errors/AppError';
-import { UsersRepository } from '../modules/accounts/repositories/implementations/UsersRepository';
-import { statusCode } from '../utils';
+import { AppError } from '@errors/AppError';
+import { UsersRepository } from '@modules/accounts/repositories/implementations/UsersRepository';
+import { statusCode } from '@utils/statusCode';
 
 interface ITokenPayload {
   sub: string;

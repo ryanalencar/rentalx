@@ -1,8 +1,9 @@
 import { Repository } from 'typeorm';
 
-import AppDataSource from '../../../../database';
-import { ICreateUserDTO } from '../../dtos';
-import { User } from '../../entitites/User';
+import { AppDataSource } from '@database/index';
+import { ICreateUserDTO } from '@modules/accounts/dtos';
+import { User } from '@modules/accounts/entitites';
+
 import { IUsersRepository } from '../IUsersRepository';
 
 class UsersRepository implements IUsersRepository {

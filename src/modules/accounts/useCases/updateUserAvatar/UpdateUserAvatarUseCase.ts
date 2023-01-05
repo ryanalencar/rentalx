@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Singletons } from '../../../../shared/container';
-import { deleteFile } from '../../../../utils/file';
-import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { Singletons } from '@shared/container';
+import { deleteFile } from '@utils/file';
 
 interface IRequest {
   user_id: string;

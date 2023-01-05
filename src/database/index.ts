@@ -5,7 +5,7 @@ import { Category, Specification } from '../modules/cars/entities';
 
 import 'reflect-metadata';
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
   port: 5432,
@@ -20,5 +20,3 @@ const AppDataSource = new DataSource({
 export function createConnection(host = 'rentx-database'): Promise<DataSource> {
   return AppDataSource.setOptions({ host }).initialize();
 }
-
-export default AppDataSource;

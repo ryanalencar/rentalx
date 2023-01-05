@@ -1,9 +1,9 @@
 import { injectable, inject } from 'tsyringe';
 
-import { AppError } from '../../../../../errors/AppError';
-import { Singletons } from '../../../../../shared/container';
-import { statusCode } from '../../../../../utils';
-import { ICategoriesRepository } from '../../../repositories/ICategoriesRepository';
+import { AppError } from '@errors/AppError';
+import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository';
+import { Singletons } from '@shared/container';
+import { statusCode } from '@utils/statusCode';
 
 interface IRequest {
   name: string;
