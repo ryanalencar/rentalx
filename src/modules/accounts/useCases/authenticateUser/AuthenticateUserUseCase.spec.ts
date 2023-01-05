@@ -1,6 +1,7 @@
-import { makeUser } from '../../../../../test/factories/user-factory';
-import { AppError } from '../../../../errors/AppError';
-import { UsersRepositoryInMemory } from '../../repositories/in-memory/UsersRepositoryInMemory';
+import { AppError } from '@errors/AppError';
+import { makeUser } from '@test/factories/user-factory';
+import { UsersRepositoryInMemory } from '@test/repositories/UsersRepositoryInMemory';
+
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
 import {
   AuthenticateUserUseCase,
