@@ -2,7 +2,7 @@ import { ICreateUserDTO } from '../../src/modules/accounts/dtos';
 
 type Override = Partial<ICreateUserDTO>;
 
-export function makeUser(override: Override = {}): Override {
+export function makeUser(override: Override = {}) {
   return {
     name: 'user',
     email: 'user@example.com',

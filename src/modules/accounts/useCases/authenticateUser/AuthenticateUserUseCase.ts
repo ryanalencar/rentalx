@@ -13,13 +13,13 @@ interface IAuthenticateUserRequest {
   password: string;
 }
 
-interface IAuthenticateUserResponse {
+export interface IAuthenticateUserResponse {
   user: Omit<ICreateUserDTO, 'password' | 'driver_license'>;
   token: string;
 }
 
 @injectable()
-class AuthenticateUserUseCase {
+export class AuthenticateUserUseCase {
   constructor(
     @inject(Singletons.UsersRepository)
     private usersRepository: IUsersRepository,
@@ -59,5 +59,3 @@ class AuthenticateUserUseCase {
     };
   }
 }
-
-export { AuthenticateUserUseCase };
