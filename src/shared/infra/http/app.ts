@@ -1,14 +1,16 @@
+import 'reflect-metadata';
+import 'express-async-errors';
+
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 
-import { createConnection } from './database';
-import { handleErrors } from './middlewares/handleErrors';
-import { router } from './routes';
-import swaggerFile from './swagger.json';
+import { router } from '@shared/infra/http/routes';
 
-import 'express-async-errors';
-import 'reflect-metadata';
-import './shared/container';
+import swaggerFile from '../../../swagger.json';
+import { createConnection } from '../typeorm';
+import { handleErrors } from './middlewares/handleErrors';
+
+import '@shared/container';
 
 createConnection();
 

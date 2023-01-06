@@ -1,4 +1,4 @@
-import { AppError } from '@errors/AppError';
+import { AppError } from '@shared/errors/AppError';
 import { makeCategory } from '@test/factories/category-factory';
 import { CategoriesRepositoryInMemory } from '@test/repositories/CategoriesRepositoryInMemory';
 
