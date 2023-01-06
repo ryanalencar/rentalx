@@ -1,4 +1,5 @@
 import { AppError } from '@errors/AppError';
+import { makeCategory } from '@test/factories/category-factory';
 import { CategoriesRepositoryInMemory } from '@test/repositories/CategoriesRepositoryInMemory';
 
 import { CreateCategoryUseCase } from './CreateCategoryUseCase';
@@ -15,10 +16,7 @@ describe('Create category', () => {
   });
 
   it('should be able to create a new category', async () => {
-    const category = {
-      name: 'Test Category',
-      description: 'This is a test category',
-    };
+    const category = makeCategory();
 
     await createCategoryUseCase.execute(category);
 
@@ -30,10 +28,7 @@ describe('Create category', () => {
   });
 
   it('should not be able to create a category with the same name', async () => {
-    const category = {
-      name: 'Test Category',
-      description: 'This is a test category',
-    };
+    const category = makeCategory();
 
     await createCategoryUseCase.execute(category);
 
