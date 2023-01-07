@@ -14,9 +14,10 @@
   },
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn --poll src/server.ts",
-    "typeorm": "typeorm-ts-node-commonjs",
-    "typeorm:migration-run": "typeorm-ts-node-commonjs migration:run -d src/database/index.ts",
-    "typeorm:migration-revert": "typeorm-ts-node-commonjs migration:revert -d src/database/index.ts",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js src/shared/infra/typeorm/index.ts",
+    "typeorm:migration-run": "yarn typeorm migration:run",
+    "typeorm:migration-revert": "typeorm-ts-node-esm migration:revert",
+    "typeorm:migration-create": "typeorm-ts-node-esm migration:create",
     "test": "jest"
   },
   "devDependencies": {

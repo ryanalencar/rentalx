@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
   database: 'rentx',
   entities: [Category, Specification, User],
   subscribers: [],
-  migrations: ['src/database/migrations/*.ts'],
+  migrations: ['src/shared/infra/typeorm/migrations/*.ts'],
 });
 
 export function createConnection(host = 'rentx-database'): Promise<DataSource> {
