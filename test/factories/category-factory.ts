@@ -1,4 +1,4 @@
-import { ICreateCategoryDTO } from '@modules/cars/repositories/ICategoriesRepository';
+import { ICreateCategoryDTO } from '@modules/cars/dtos';
 
 type Override = Partial<ICreateCategoryDTO>;
 
