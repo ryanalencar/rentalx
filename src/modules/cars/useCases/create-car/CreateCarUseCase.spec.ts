@@ -16,13 +16,9 @@ describe('Create car', () => {
   it('should be able to create a new car', async () => {
     const car = makeCar();
 
-    await createCarUseCase.execute(car);
+    const createdCar = await createCarUseCase.execute(car);
 
-    const carCreated = await carsRepository.findByLicensePlate(
-      car.license_plate,
-    );
-
-    expect(carCreated).toMatchObject(car);
+    expect(createdCar).toMatchObject(car);
   });
 
   it('should not be able to create a new car with existing license plate', async () => {
