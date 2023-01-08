@@ -7,14 +7,10 @@ import { CreateCarUseCase } from './CreateCarUseCase';
 
 export class CreateCarController {
   async handle(request: Request, response: Response) {
-    try {
-      const createCarUseCase = container.resolve(CreateCarUseCase);
+    const createCarUseCase = container.resolve(CreateCarUseCase);
 
-      const car = await createCarUseCase.execute(request.body);
+    const car = await createCarUseCase.execute(request.body);
 
-      return response.status(statusCode.created).send({ car });
-    } catch (error) {
-      return response.status(statusCode.badRequest).send(error);
-    }
+    return response.status(statusCode.created).send({ car });
   }
 }
