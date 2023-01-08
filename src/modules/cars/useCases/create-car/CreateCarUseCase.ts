@@ -1,5 +1,8 @@
+import { inject, injectable } from 'tsyringe';
+
 import { Car } from '@modules/cars/infra/typeorm/entities';
 import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
+import { Singletons } from '@shared/container';
 import { AppError } from '@shared/errors/AppError';
 import { statusCode } from '@utils/statusCode';
 
@@ -13,10 +16,10 @@ interface ICreateCarRequest {
   category_id: string;
 }
 
-// @injectable()
+@injectable()
 export class CreateCarUseCase {
   constructor(
-    // @inject('CarsRepository')
+    @inject(Singletons.CarsRepository)
     private carsRepository: ICarsRepository,
   ) { }
   async execute(data: ICreateCarRequest): Promise<Car> {
