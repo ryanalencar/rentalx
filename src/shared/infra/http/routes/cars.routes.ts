@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { CreateCarController } from '@modules/cars/useCases/create-car/CreateCarController';
+import { CreateCarController } from '@modules/cars/useCases/car/create-car/CreateCarController';
 
 import { isAdmin } from '../middlewares/isAdmin';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
