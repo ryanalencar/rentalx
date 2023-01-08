@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
-import auth from '@config/auth';
+import { authConfig } from '@config/auth';
 import { AppError } from '@shared/errors/AppError';
 import { statusCode } from '@utils/statusCode';
 
@@ -23,7 +23,7 @@ export async function isAuthenticated(
   const [, token] = authHeader.split(' ');
 
   try {
-    const { sub: user_id } = verify(token, auth.secret_token) as IPayload;
+    const { sub: user_id } = verify(token, authConfig.secret_token) as IPayload;
 
     request.user = {
       id: user_id,

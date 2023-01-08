@@ -2,10 +2,11 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '@shared/errors/AppError';
+import { authConfig } from '@config/auth';
 import { ICreateUserDTO } from '@modules/accounts/dtos';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { Singletons } from '@shared/container';
+import { AppError } from '@shared/errors/AppError';
 import { statusCode } from '@utils/statusCode';
 
 interface IAuthenticateUserRequest {
@@ -30,6 +31,13 @@ export class AuthenticateUserUseCase {
     password,
   }: IAuthenticateUserRequest): Promise<IAuthenticateUserResponse> {
     const user = await this.usersRepository.findByEmail(email);
+    const {
+      expires_in_token,
+      secret_refresh_token,
+      secret_token,
+      expires_in_refresh_token,
+      expires_refresh_token_days,
+    } = authConfig;
 
     if (!user)
       throw new AppError(
@@ -45,7 +53,7 @@ export class AuthenticateUserUseCase {
         statusCode.unauthorized,
       );
 
-    const token = sign({}, '5490f5b9758d9b33f2b37c3cbca45677', {
+    const token = sign({}, secret_token, {
       subject: user.id,
       expiresIn: '1d',
     });
