@@ -1,13 +1,29 @@
 import { ICreateCarDTO } from '@modules/cars/dtos';
 import { Car } from '@modules/cars/infra/typeorm/entities';
-import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
+import {
+  ICarsRepository,
+  IFindAvailableParams,
+} from '@modules/cars/repositories/ICarsRepository';
 
 export class CarsRepositoryInMemory implements ICarsRepository {
   cars: Car[] = [];
 
-  async findAvailable(): Promise<Car[]> {
-    const cars = this.cars.filter((car) => car.available === true);
-    return cars;
+  async findAvailable(params: IFindAvailableParams): Promise<Car[]> {
+    const { brand, category_id, name } = params;
+
+    let availableCars = this.cars.filter((car) => car.available);
+
+    if (!brand && !category_id && !name) return availableCars;
+
+    availableCars = availableCars.filter((car) => {
+      if (car.name === name) return true;
+      if (car.brand === brand) return true;
+      if (car.category_id === category_id) return true;
+
+      return false;
+    });
+
+    return availableCars;
   }
 
   async findByLicensePlate(license_plate: string): Promise<Car> {
