@@ -10,5 +10,6 @@ export interface IFindAvailableParams {
 export interface ICarsRepository {
   create(data: ICreateCarDTO): Promise<Car>;
   findByLicensePlate(license_plate: string): Promise<Car>;
+  findById(id: string): Promise<Car>;
   findAvailable(params: IFindAvailableParams): Promise<Car[]>;
 }

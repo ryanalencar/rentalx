@@ -8,6 +8,11 @@ import {
 export class CarsRepositoryInMemory implements ICarsRepository {
   cars: Car[] = [];
 
+  async findById(id: string): Promise<Car> {
+    const car = this.cars.find((_car) => _car.id === id);
+    return car;
+  }
+
   async findAvailable(params: IFindAvailableParams): Promise<Car[]> {
     const { brand, category_id, name } = params;
 

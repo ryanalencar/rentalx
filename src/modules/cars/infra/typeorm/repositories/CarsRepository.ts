@@ -16,12 +16,17 @@ export class CarsRepository implements ICarsRepository {
     this.repository = AppDataSource.getRepository(Car);
   }
 
+  async findById(id: string): Promise<Car> {
+    const car = await this.repository.findOneBy({ id });
+    return car;
+  }
+
   async findAvailable({
     brand,
     category_id,
     name,
   }: IFindAvailableParams): Promise<Car[]> {
-    const carsQuery = await this.repository
+    const carsQuery = this.repository
       .createQueryBuilder('cars')
       .where('available = :available', { available: true });
 
