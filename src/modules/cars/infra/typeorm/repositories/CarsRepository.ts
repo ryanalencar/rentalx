@@ -13,6 +13,11 @@ export class CarsRepository implements ICarsRepository {
     this.repository = AppDataSource.getRepository(Car);
   }
 
+  async findAvailable(): Promise<Car[]> {
+    const cars = await this.repository.findBy({ available: true });
+    return cars;
+  }
+
   async create(data: ICreateCarDTO): Promise<Car> {
     const carInstance = this.repository.create(data);
 
