@@ -1,8 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '@shared/errors/AppError';
+import { Specification } from '@modules/cars/infra/typeorm/entities';
 import { SpecificationsRepository } from '@modules/cars/infra/typeorm/repositories/SpecificationsRepository';
 import { Singletons } from '@shared/container';
+import { AppError } from '@shared/errors/AppError';
 import { statusCode } from '@utils/statusCode';
 
 interface IRequest {
@@ -17,7 +18,7 @@ class CreateEspecificationUseCase {
     private specificationsRepository: SpecificationsRepository,
   ) { }
 
-  async execute({ description, name }: IRequest): Promise<void> {
+  async execute({ description, name }: IRequest): Promise<Specification> {
     const specificationAlreadyExists =
       await this.specificationsRepository.findByName(name);
 
@@ -25,7 +26,12 @@ class CreateEspecificationUseCase {
       throw new AppError('Specification already exists', statusCode.conflict);
     }
 
-    await this.specificationsRepository.create({ description, name });
+    const specification = await this.specificationsRepository.create({
+      description,
+      name,
+    });
+
+    return specification;
   }
 }
 
