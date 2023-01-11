@@ -2,9 +2,9 @@ import { makeCar } from '@test/factories/car-factory';
 import { CarsRepositoryInMemory } from '@test/repositories/CarsRepositoryInMemory';
 
 import { CreateCarUseCase } from '../create-car/CreateCarUseCase';
-import { ListAvailableCarsUsecase } from './ListAvailableCarsUsecase';
+import { ListAvailableCarsUseCase } from './ListAvailableCarsUseCase';
 
-let listCarsUseCase: ListAvailableCarsUsecase;
+let listCarsUseCase: ListAvailableCarsUseCase;
 let createCarUseCase: CreateCarUseCase;
 let carsRepository: CarsRepositoryInMemory;
 
@@ -12,7 +12,7 @@ describe('List cars', () => {
   beforeEach(async () => {
     carsRepository = new CarsRepositoryInMemory();
     createCarUseCase = new CreateCarUseCase(carsRepository);
-    listCarsUseCase = new ListAvailableCarsUsecase(carsRepository);
+    listCarsUseCase = new ListAvailableCarsUseCase(carsRepository);
   });
   it('should be able to list all available cars', async () => {
     const car1 = makeCar();

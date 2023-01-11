@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { ListAvailableCarsUsecase } from './ListAvailableCarsUsecase';
+import { ListAvailableCarsUseCase } from './ListAvailableCarsUseCase';
 
 export class ListAvailableCarsController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { brand, name, category_id } = request.query;
 
     const listAvailableCarsUseCase = container.resolve(
-      ListAvailableCarsUsecase,
+      ListAvailableCarsUseCase,
     );
 
     const cars = await listAvailableCarsUseCase.execute({

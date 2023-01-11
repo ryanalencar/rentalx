@@ -11,7 +11,7 @@ interface IRequest {
 }
 
 @injectable()
-export class ListAvailableCarsUsecase {
+export class ListAvailableCarsUseCase {
   constructor(
     @inject(Singletons.CarsRepository)
     private carsRepository: ICarsRepository,
