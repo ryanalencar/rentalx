@@ -1,11 +1,11 @@
 import { Repository } from 'typeorm';
 
-import { ICarsImageRepository } from '@modules/cars/repositories/ICarsImagesRepository';
+import { ICarsImagesRepository } from '@modules/cars/repositories/ICarsImagesRepository';
 import { AppDataSource } from '@shared/infra/typeorm';
 
 import { CarImage } from '../entities/CarImage';
 
-export class CarsImagesRepository implements ICarsImageRepository {
+export class CarsImagesRepository implements ICarsImagesRepository {
   private repository: Repository<CarImage>;
 
   constructor() {
