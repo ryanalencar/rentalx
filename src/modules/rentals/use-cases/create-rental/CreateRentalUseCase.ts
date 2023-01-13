@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { inject, injectable } from 'tsyringe';
 
 import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
@@ -19,7 +18,7 @@ export class CreateRentalUseCase {
   constructor(
     @inject(Singletons.RentalsRepository)
     private rentalsRepository: IRentalsRepository,
-    @inject(Singletons.DayjsDateProvider)
+    @inject('DayjsDateProvider')
     private dateProvider: IDateProvider,
   ) { }
 

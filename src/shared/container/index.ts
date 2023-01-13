@@ -1,5 +1,7 @@
 import { container } from 'tsyringe';
 
+import '@shared/container/providers';
+
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { CarsImagesRepository } from '@modules/cars/infra/typeorm/repositories/CarsImagesRepository';
@@ -13,8 +15,6 @@ import { ISpecificationsRepository } from '@modules/cars/repositories/ISpecifica
 import { RentalsRepository } from '@modules/rentals/infra/typeorm/repositories/RentalsRepository';
 import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
 
-import '@shared/container/providers';
-
 export enum Singletons {
   CategoriesRepository = 'CategoriesRepository',
   SpecificationsRepository = 'SpecificationsRepository',
@@ -22,7 +22,6 @@ export enum Singletons {
   CarsRepository = 'CarsRepository',
   CarsImagesRepository = 'CarsImagesRepository',
   RentalsRepository = 'RentalsRepository',
-  DayjsDateProvider = 'DayjsDateProvider',
 }
 
 container.registerSingleton<ICategoriesRepository>(
