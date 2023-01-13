@@ -7,6 +7,7 @@ import {
   Specification,
   CarImage,
 } from '@modules/cars/infra/typeorm/entities';
+import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -15,7 +16,7 @@ export const AppDataSource = new DataSource({
   username: 'postgres',
   password: '123456',
   database: 'rentx',
-  entities: [Car, Category, Specification, User, CarImage],
+  entities: [Car, Category, Specification, User, CarImage, Rental],
   subscribers: [],
   migrations: ['src/shared/infra/typeorm/migrations/*.ts'],
 });
