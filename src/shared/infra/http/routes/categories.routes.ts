@@ -2,9 +2,9 @@ import { Router } from 'express';
 import multer from 'multer';
 
 import { uploadConfig } from '@config/upload';
-import { CreateCategoryController } from '@modules/cars/useCases/category/createCategory';
-import { ImportCategoryController } from '@modules/cars/useCases/category/importCategory';
-import { ListCategoriesController } from '@modules/cars/useCases/category/listCategories';
+import { CreateCategoryController } from '@modules/cars/useCases/category/createCategory/CreateCategoryController';
+import { ImportCategoryController } from '@modules/cars/useCases/category/importCategory/ImportCategoryController';
+import { ListCategoriesController } from '@modules/cars/useCases/category/listCategories/ListCategoriesController';
 
 import { isAdmin } from '../middlewares/isAdmin';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
