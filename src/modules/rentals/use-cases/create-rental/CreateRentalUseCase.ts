@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
+import { inject, injectable } from 'tsyringe';
 
 import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
 import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
+import { Singletons } from '@shared/container';
 import { IDateProvider } from '@shared/container/providers/date-provider/IDateProvider';
 import { AppError } from '@shared/errors/AppError';
 import { statusCode } from '@utils/statusCode';
@@ -12,9 +14,12 @@ interface IRequest {
   expected_return_date: Date;
 }
 
+@injectable()
 export class CreateRentalUseCase {
   constructor(
+    @inject(Singletons.RentalsRepository)
     private rentalsRepository: IRentalsRepository,
+    @inject(Singletons.DayjsDateProvider)
     private dateProvider: IDateProvider,
   ) { }
 
