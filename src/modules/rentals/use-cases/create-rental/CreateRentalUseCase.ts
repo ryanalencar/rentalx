@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 
 import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
 import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
+import { IDateProvider } from '@shared/container/providers/date-provider/IDateProvider';
 import { AppError } from '@shared/errors/AppError';
-import { dateToUTC } from '@utils/dateToUTC';
 import { statusCode } from '@utils/statusCode';
 
 interface IRequest {
@@ -13,10 +13,14 @@ interface IRequest {
 }
 
 export class CreateRentalUseCase {
-  constructor(private rentalsRepository: IRentalsRepository) { }
+  constructor(
+    private rentalsRepository: IRentalsRepository,
+    private dateProvider: IDateProvider,
+  ) { }
 
   async execute(data: IRequest): Promise<Rental> {
     const MINIMUN_HOUR_TO_RENT = 24;
+
     const carHasOpenRent = await this.rentalsRepository.findOpenRentalByCar(
       data.car_id,
     );
@@ -35,9 +39,12 @@ export class CreateRentalUseCase {
       );
     }
 
-    const compareHoursDifference = dayjs(
-      dateToUTC(data.expected_return_date),
-    ).diff(dateToUTC(dayjs()), 'hours');
+    const dateNow = this.dateProvider.dateNow();
+
+    const compareHoursDifference = this.dateProvider.compareInHours(
+      dateNow,
+      data.expected_return_date,
+    );
 
     if (compareHoursDifference < MINIMUN_HOUR_TO_RENT) {
       throw new AppError(
