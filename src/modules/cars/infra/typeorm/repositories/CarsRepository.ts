@@ -21,6 +21,11 @@ export class CarsRepository implements ICarsRepository {
     return car;
   }
 
+  async findByLicensePlate(license_plate: string): Promise<Car> {
+    const car = this.repository.findOneBy({ license_plate });
+    return car;
+  }
+
   async findAvailable({
     brand,
     category_id,
@@ -47,8 +52,14 @@ export class CarsRepository implements ICarsRepository {
 
     return car;
   }
-  async findByLicensePlate(license_plate: string): Promise<Car> {
-    const car = this.repository.findOneBy({ license_plate });
-    return car;
+
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({ available })
+      .where('id = :id')
+      .setParameters({ id })
+      .execute();
   }
 }
