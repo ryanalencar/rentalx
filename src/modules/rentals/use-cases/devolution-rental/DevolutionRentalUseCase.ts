@@ -25,13 +25,14 @@ export class DevolutionRentalUseCase {
 
   async execute({ id, user_id }: IRequest) {
     const rental = await this.rentalsRepository.findById(id);
-    const car = await this.carsRepository.findById(rental.car_id);
 
     const MINIMUM_DAILY = 1;
 
     if (!rental) {
       throw new AppError('Rental does not exist', statusCode.notFound);
     }
+
+    const car = await this.carsRepository.findById(rental.car_id);
 
     const dateNow = this.dateProvider.dateNow();
 
