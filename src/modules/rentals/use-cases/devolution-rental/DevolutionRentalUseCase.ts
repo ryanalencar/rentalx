@@ -5,7 +5,6 @@ import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsReposi
 import { Singletons } from '@shared/container';
 import { IDateProvider } from '@shared/container/providers/date-provider/IDateProvider';
 import { AppError } from '@shared/errors/AppError';
-import { deleteFile } from '@utils/file';
 import { statusCode } from '@utils/statusCode';
 
 interface IRequest {
@@ -26,7 +25,7 @@ export class DevolutionRentalUseCase {
 
   async execute({ id, user_id }: IRequest) {
     const rental = await this.rentalsRepository.findById(id);
-    const car = await this.carsRepository.findById(id);
+    const car = await this.carsRepository.findById(rental.car_id);
 
     const MINIMUM_DAILY = 1;
 
