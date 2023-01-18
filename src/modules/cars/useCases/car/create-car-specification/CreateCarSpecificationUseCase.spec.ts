@@ -3,6 +3,7 @@ import { makeCar } from '@test/factories/car-factory';
 import { makeSpecification } from '@test/factories/specification-factory';
 import { CarsRepositoryInMemory } from '@test/repositories/CarsRepositoryInMemory';
 import { SpecificationsRepositoryInMemory } from '@test/repositories/SpecificationsRepositoryInMemory';
+import { statusCode } from '@utils/statusCode';
 
 import { CreateCarSpecificationUseCase } from './CreateCarSpecificationUseCase';
 
@@ -36,11 +37,13 @@ describe('Create Car Specification', () => {
   });
 
   it('should not be able to create a new specification for a non existing car', async () => {
-    expect(async () => {
-      await createCarSpecificationUseCase.execute({
+    await expect(
+      createCarSpecificationUseCase.execute({
         car_id: 'non-existing-car',
         specifications_id: ['specification-id'],
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(
+      new AppError('Car does not exists!', statusCode.badRequest),
+    );
   });
 });

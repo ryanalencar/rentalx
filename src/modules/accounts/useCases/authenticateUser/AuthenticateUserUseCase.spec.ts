@@ -1,6 +1,7 @@
 import { AppError } from '@shared/errors/AppError';
 import { makeUser } from '@test/factories/user-factory';
 import { UsersRepositoryInMemory } from '@test/repositories/UsersRepositoryInMemory';
+import { statusCode } from '@utils/statusCode';
 
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
 import {
@@ -38,12 +39,14 @@ describe('Authenticate user', () => {
   });
 
   it('should not be able to authenticate a non existing user', async () => {
-    expect(async () => {
-      await authenticateUserUseCase.execute({
+    await expect(
+      authenticateUserUseCase.execute({
         email: 'fake@example.com',
         password: '1234',
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(
+      new AppError('Email or password incorrect', statusCode.unauthorized),
+    );
   });
 
   it('should not be able to authenticate with incorrect password', async () => {
@@ -51,11 +54,13 @@ describe('Authenticate user', () => {
 
     await createUserUseCase.execute(user);
 
-    expect(async () => {
-      await authenticateUserUseCase.execute({
+    await expect(
+      authenticateUserUseCase.execute({
         email: user.email,
         password: 'wrong-password',
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(
+      new AppError('Email or password incorrect', statusCode.unauthorized),
+    );
   });
 });

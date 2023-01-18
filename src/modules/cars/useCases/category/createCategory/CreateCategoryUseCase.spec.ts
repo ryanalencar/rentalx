@@ -1,6 +1,7 @@
 import { AppError } from '@shared/errors/AppError';
 import { makeCategory } from '@test/factories/category-factory';
 import { CategoriesRepositoryInMemory } from '@test/repositories/CategoriesRepositoryInMemory';
+import { statusCode } from '@utils/statusCode';
 
 import { CreateCategoryUseCase } from './CreateCategoryUseCase';
 
@@ -32,8 +33,8 @@ describe('Create category', () => {
 
     await createCategoryUseCase.execute(category);
 
-    expect(async () => {
-      await createCategoryUseCase.execute(category);
-    }).rejects.toBeInstanceOf(AppError);
+    await expect(createCategoryUseCase.execute(category)).rejects.toEqual(
+      new AppError('Category already exists!', statusCode.conflict),
+    );
   });
 });

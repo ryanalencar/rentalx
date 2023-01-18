@@ -1,6 +1,7 @@
 import { AppError } from '@shared/errors/AppError';
 import { makeCar } from '@test/factories/car-factory';
 import { CarsRepositoryInMemory } from '@test/repositories/CarsRepositoryInMemory';
+import { statusCode } from '@utils/statusCode';
 
 import { CreateCarUseCase } from './CreateCarUseCase';
 
@@ -26,9 +27,9 @@ describe('Create car', () => {
 
     await createCarUseCase.execute(car);
 
-    expect(async () => {
-      await createCarUseCase.execute(car);
-    }).rejects.toBeInstanceOf(AppError);
+    await expect(createCarUseCase.execute(car)).rejects.toEqual(
+      new AppError('Car already exists', statusCode.conflict),
+    );
   });
 
   it('should be able to create a car with available true by default', async () => {
