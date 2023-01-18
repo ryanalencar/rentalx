@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 
-import { User } from '@modules/accounts/infra/typeorm/entities';
+import { User, UserTokens } from '@modules/accounts/infra/typeorm/entities';
 import {
   Car,
   Category,
@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
   username: 'postgres',
   password: '123456',
   database: 'rentx',
-  entities: [Car, Category, Specification, User, CarImage, Rental],
+  entities: [Car, Category, Specification, User, CarImage, Rental, UserTokens],
   subscribers: [],
   migrations: ['src/shared/infra/typeorm/migrations/*.ts'],
 });
