@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { inject, injectable } from 'tsyringe';
 import { v4 as uuidV4 } from 'uuid';
 
@@ -29,6 +30,14 @@ export class SendForgotPasswordMailUseCase {
   async execute({ email }: IRequest): Promise<void> {
     const TOKEN_HOURS_EXPIRATION = 3;
     const user = await this.usersRepository.findByEmail(email);
+    const templatePath = resolve(
+      __dirname,
+      '..',
+      '..',
+      'views',
+      'emails',
+      'forgotPassword.hbs',
+    );
 
     if (!user) {
       throw new AppError('User not found', statusCode.notFound);
@@ -45,10 +54,16 @@ export class SendForgotPasswordMailUseCase {
       expires_date: token_expiration_date,
     });
 
+    const templateVariables = {
+      name: user.name,
+      link: `${process.env.FORGOT_MAIL_URL}${token}`,
+    };
+
     await this.mailProvider.sendMail({
       to: email,
       subject: 'Password reset',
-      body: `The link to reset your password is ${token}`,
+      path: templatePath,
+      variables: templateVariables,
     });
   }
 }
