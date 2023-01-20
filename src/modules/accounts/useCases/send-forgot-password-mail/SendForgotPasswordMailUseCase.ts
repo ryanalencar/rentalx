@@ -5,6 +5,7 @@ import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepositor
 import { IUsersTokensRepository } from '@modules/accounts/repositories/IUsersTokensRepository';
 import { Singletons } from '@shared/container';
 import { IDateProvider } from '@shared/container/providers/date-provider/IDateProvider';
+import { IMailProvider } from '@shared/container/providers/mail-provider/IMailProvider';
 import { AppError } from '@shared/errors/AppError';
 import { statusCode } from '@utils/statusCode';
 
@@ -21,9 +22,11 @@ export class SendForgotPasswordMailUseCase {
     private usersTokensRepository: IUsersTokensRepository,
     @inject('DayjsDateProvider')
     private dateProvider: IDateProvider,
+    @inject('EtherealMailProvider')
+    private mailProvider: IMailProvider,
   ) { }
 
-  async execute({ email }: IRequest) {
+  async execute({ email }: IRequest): Promise<void> {
     const TOKEN_HOURS_EXPIRATION = 3;
     const user = await this.usersRepository.findByEmail(email);
 
@@ -40,6 +43,12 @@ export class SendForgotPasswordMailUseCase {
       refresh_token: token,
       user_id: user.id,
       expires_date: token_expiration_date,
+    });
+
+    await this.mailProvider.sendMail({
+      to: email,
+      subject: 'Password reset',
+      body: `The link to reset your password is ${token}`,
     });
   }
 }
