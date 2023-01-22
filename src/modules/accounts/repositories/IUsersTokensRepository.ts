@@ -9,6 +9,7 @@ export interface IFindByUserIdAndRefreshTokenParams {
 export interface IUsersTokensRepository {
   findByUserIdAndRefreshToken({
     refresh_token,
+    user_id,
   }: IFindByUserIdAndRefreshTokenParams): Promise<UserTokens>;
   findByRefreshToken(refresh_token: string): Promise<UserTokens>;
   create(data: ICreateUserTokenDTO): Promise<UserTokens>;
