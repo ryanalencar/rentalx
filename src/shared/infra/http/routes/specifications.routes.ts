@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { CreateSpecificationController } from '@modules/cars/useCases/specification/createSpecification';
-import { ListSpecificationsController } from '@modules/cars/useCases/specification/listSpecifications';
+import { CreateSpecificationController } from '@modules/cars/use-cases/specification/createSpecification';
+import { ListSpecificationsController } from '@modules/cars/use-cases/specification/listSpecifications';
 
 import { isAdmin } from '../middlewares/isAdmin';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
