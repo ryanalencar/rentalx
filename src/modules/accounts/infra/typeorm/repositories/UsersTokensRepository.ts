@@ -16,6 +16,11 @@ export class UsersTokensRepository implements IUsersTokensRepository {
     this.repository = AppDataSource.getRepository(UserTokens);
   }
 
+  async findByRefreshToken(refresh_token: string): Promise<UserTokens> {
+    const userToken = await this.repository.findOneBy({ refresh_token });
+    return userToken;
+  }
+
   async findByUserIdAndRefreshToken({
     refresh_token,
     user_id,
