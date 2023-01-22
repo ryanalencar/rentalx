@@ -1,6 +1,8 @@
+import { DayjsDateProvider } from '@shared/container/providers/date-provider/implementations/DayjsDateProvider';
 import { AppError } from '@shared/errors/AppError';
 import { makeUser } from '@test/factories/user-factory';
 import { UsersRepositoryInMemory } from '@test/repositories/UsersRepositoryInMemory';
+import { UsersTokensRepositoryInMemory } from '@test/repositories/UsersTokensRepositoryInMemory';
 import { statusCode } from '@utils/statusCode';
 
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
@@ -12,13 +14,19 @@ import {
 let createUserUseCase: CreateUserUseCase;
 let authenticateUserUseCase: AuthenticateUserUseCase;
 let usersRepositoryInMemory: UsersRepositoryInMemory;
+let usersTokensRepositoryInMemory: UsersTokensRepositoryInMemory;
+let dateProvider: DayjsDateProvider;
 
 describe('Authenticate user', () => {
   beforeEach(() => {
     usersRepositoryInMemory = new UsersRepositoryInMemory();
+    usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
     createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
+    dateProvider = new DayjsDateProvider();
     authenticateUserUseCase = new AuthenticateUserUseCase(
       usersRepositoryInMemory,
+      usersTokensRepositoryInMemory,
+      dateProvider,
     );
   });
 
@@ -35,6 +43,7 @@ describe('Authenticate user', () => {
     expect(authenticatedUser).toMatchObject<IAuthenticateUserResponse>({
       user: authenticatedUser.user,
       token: authenticatedUser.token,
+      refresh_token: authenticatedUser.refresh_token,
     });
   });
 
