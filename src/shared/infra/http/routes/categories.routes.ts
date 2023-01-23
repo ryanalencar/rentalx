@@ -11,7 +11,7 @@ import { isAuthenticated } from '../middlewares/isAuthenticated';
 
 const categoriesRoutes = Router();
 
-const uploadCategory = multer(uploadConfig.upload('./temp/category'));
+const uploadCategory = multer(uploadConfig);
 
 const createCategoryController = new CreateCategoryController();
 const importCategoryController = new ImportCategoryController();
