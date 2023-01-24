@@ -5,25 +5,28 @@ import { uploadConfig } from '@config/upload';
 
 import { IStorageProvider } from '../IStorageProvider';
 
-export class LocalStorageProvider implements IStorageProvider {
+class LocalStorageProvider implements IStorageProvider {
   async save(file: string, folder: string): Promise<string> {
+    console.log(resolve(uploadConfig.tmpFolder, file));
+    console.log(resolve(`${uploadConfig.tmpFolder}/${folder}`, file));
     await fs.promises.rename(
-      resolve(uploadConfig.tempFolder, file),
-      resolve(`${uploadConfig.tempFolder}/${folder}`, file),
+      resolve(uploadConfig.tmpFolder, file),
+      resolve(`${uploadConfig.tmpFolder}/${folder}`, file),
     );
 
     return file;
   }
 
   async delete(file: string, folder: string): Promise<void> {
-    const fileName = resolve(`${uploadConfig.tempFolder}/${folder}`, file);
+    const filename = resolve(`${uploadConfig.tmpFolder}/${folder}`, file);
 
     try {
-      await fs.promises.stat(fileName);
-    } catch (err) {
+      await fs.promises.stat(filename);
+    } catch {
       return;
     }
-
-    await fs.promises.unlink(fileName);
+    await fs.promises.unlink(filename);
   }
 }
+
+export { LocalStorageProvider };
