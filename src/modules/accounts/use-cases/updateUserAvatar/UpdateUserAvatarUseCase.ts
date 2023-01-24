@@ -15,17 +15,17 @@ export class UpdateUserAvatarUseCase {
     @inject(Singletons.UsersRepository)
     private usersRepository: IUsersRepository,
     @inject('StorageProvider')
-    private localStorageProvider: IStorageProvider,
+    private storageProvider: IStorageProvider,
   ) { }
 
   async execute({ avatar_file, user_id }: IRequest): Promise<void> {
     const user = await this.usersRepository.findById(user_id);
 
     if (user.avatar) {
-      await this.localStorageProvider.delete(user.avatar, 'avatar');
+      await this.storageProvider.delete(user.avatar, 'avatar');
     }
 
-    await this.localStorageProvider.save(avatar_file, 'avatar');
+    await this.storageProvider.save(avatar_file, 'avatar');
 
     user.avatar = avatar_file;
 
