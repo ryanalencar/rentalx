@@ -1,7 +1,7 @@
 import { CarImage } from '@modules/cars/infra/typeorm/entities/CarImage';
-import { ICarsImageRepository } from '@modules/cars/repositories/ICarsImagesRepository';
+import { ICarsImagesRepository } from '@modules/cars/repositories/ICarsImagesRepository';
 
-export class CarsImagesRepositoryInMemory implements ICarsImageRepository {
+export class CarsImagesRepositoryInMemory implements ICarsImagesRepository {
   carImages: CarImage[] = [];
 
   async create(car_id: string, image_name: string): Promise<CarImage> {
